@@ -1,0 +1,42 @@
+spring:
+  main:
+    web-application-type: none
+    
+  # Postgres Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/benchmark?reWriteBatchedInserts=true
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 80
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+
+  # Mongo Configuration
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/benchmark?maxPoolSize=80
+
+  # Cassandra Configuration
+  cassandra:
+    keyspace-name: benchmark
+    contact-points: 127.0.0.1
+    port: 9042
+    local-datacenter: datacenter1
+    schema-action: create_if_not_exists
+    connection:
+      connect-timeout: 60s
+      init-query-timeout: 60s
+    request:
+      timeout: 60s
+
+benchmark:
+  total-records: 1000000
+  max-concurrent-connections: 80
